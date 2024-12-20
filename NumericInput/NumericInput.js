@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Button from '../Button'
 import PropTypes from 'prop-types'
 import { create, PREDEF_RES } from 'react-native-pixel-perfect'
-
+import Ionicons from '@expo/vector-icons/Ionicons';
 let calcSize = create(PREDEF_RES.iphone7.px)
 
 export default class NumericInput extends Component {
@@ -21,7 +21,7 @@ export default class NumericInput extends Component {
 
     // this.props refers to the new props
     componentDidUpdate() {
-        const initSent = !(this.props.initValue !== 0 && !this.props.initValue); 
+        const initSent = !(this.props.initValue !== 0 && !this.props.initValue);
 
         // compare the new value (props.initValue) with the existing/old one (this.state.value)
         if (this.props.initValue !== this.state.value && initSent) {
@@ -32,7 +32,7 @@ export default class NumericInput extends Component {
             });
         }
     }
-    
+
     updateBaseResolution = (width, height) => {
         calcSize = create({ width, height })
     }
@@ -164,7 +164,7 @@ export default class NumericInput extends Component {
         const totalHeight = this.props.totalHeight ? this.props.totalHeight : (totalWidth * 0.4)
         const inputWidth = this.props.type === 'up-down' ? (totalWidth * 0.6) : (totalWidth * 0.4)
         const borderRadiusTotal = totalHeight * 0.18
-        const fontSize = totalHeight * 0.38
+        const fontSize = totalHeight * 0.68
         const textColor = this.props.textColor
         const maxReached = this.state.value === this.props.maxValue
         const minReached = this.state.value === this.props.minValue
@@ -230,14 +230,14 @@ export default class NumericInput extends Component {
                 </View>)
         else return (
             <View style={inputContainerStyle}>
-                <Button onPress={this.dec} style={leftButtonStyle}>
-                    <Icon name='md-remove' size={fontSize} style={[...iconStyle, maxReached ? this.props.reachMaxDecIconStyle : {}, minReached ? this.props.reachMinDecIconStyle : {}]} />
+                <Button onPress={this.dec} style={[leftButtonStyle, { borderWidth: 0, borderRadius: 50, borderBottomLeftRadius: 50, borderTopLeftRadius: 50, marginLeft: 3 }]}>
+                    <Icon name='remove' size={fontSize} style={[...iconStyle, maxReached ? this.props.reachMaxDecIconStyle : {}, minReached ? this.props.reachMinDecIconStyle : {}]} />
                 </Button>
                 <View style={[inputWraperStyle]}>
                     <TextInput {...this.props.extraTextInputProps} editable={editable} returnKeyType='done' underlineColorAndroid='rgba(0,0,0,0)' keyboardType='numeric' value={this.state.stringValue} onChangeText={this.onChange} style={inputStyle} ref={ref => this.ref = ref} onBlur={this.onBlur} onFocus={this.onFocus} />
                 </View>
-                <Button onPress={this.inc} style={rightButtonStyle}>
-                    <Icon name='md-add' size={fontSize} style={[...iconStyle, maxReached ? this.props.reachMaxIncIconStyle : {}, minReached ? this.props.reachMinIncIconStyle : {}]} />
+                <Button onPress={this.inc} style={[rightButtonStyle, { borderWidth: 0, borderRadius: 50, borderBottomRightRadius: 50, borderTopRightRadius: 50, marginRight: 3 }]}>
+                    <Icon name='add' size={fontSize} style={[...iconStyle, maxReached ? this.props.reachMaxIncIconStyle : {}, minReached ? this.props.reachMinIncIconStyle : {}]} />
                 </Button>
             </View>)
 
@@ -274,6 +274,7 @@ const style = StyleSheet.create({
         padding: 0
     },
     icon: {
+
         fontWeight: '900',
         backgroundColor: 'rgba(0,0,0,0)'
     },
